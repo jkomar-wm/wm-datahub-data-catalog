@@ -1,0 +1,22 @@
+source:
+  type: "redshift-usage"
+  config:
+    env: "LIVE"
+    host_port: '${PROD_REDSHIFT_DB_HOST_PORT}'
+    database: "analytics"
+    email_domain: "weedmaps.com"
+    username: '${PROD_REDSHIFT_DB_USER}'
+    password: '${PROD_REDSHIFT_DB_PASS}'
+    include_tables: true
+    include_views: true
+    schema_pattern:
+      allow:
+        - "core"
+        - "report"
+    include_table_lineage: true
+    include_copy_lineage: true
+sink:
+  type: "datahub-rest"
+  config:
+    server: "http://localhost:8080"
+
